@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Examination Result</title>
+
+<style>
+body { font-family: Arial; background:#eef2ff; }
+.box {
+  width:400px;
+  margin:50px auto;
+  background:white;
+  padding:20px;
+  border-radius:8px;
+  text-align:center;
+}
+input,button {
+  width:90%;
+  padding:10px;
+  margin:10px;
+}
+button {
+  background:#1a4cff;
+  color:white;
+  border:none;
+}
+#loading,#resultBox { display:none; }
+
+table {
+  width:100%;
+  border-collapse:collapse;
+  margin-top:15px;
+}
+th,td {
+  border:1px solid black;
+  padding:6px;
+}
+th { background:#f2f2f2; }
+</style>
+</head>
+
+<body>
+
+<div class="box" id="formBox">
+<h2>Student Result Portal</h2>
+<input id="name" placeholder="Enter Name">
+<input id="regno" placeholder="Enter Register Number">
+<button onclick="submitForm()">Submit</button>
+</div>
+
+<div class="box" id="loading">
+<h3>Fetching Result...</h3>
+</div>
+
+<div class="box" id="resultBox">
+<h3>Examination Result</h3>
+<p>Name: <span id="rname"></span></p>
+<p>Register No: <span id="rreg"></span></p>
+
+<table>
+<tr>
+<th>Subject</th>
+<th>Marks</th>
+<th>Status</th>
+</tr>
+<tbody id="marksTable"></tbody>
+</table>
+
+<h3 id="finalResult"></h3>
+
+<button onclick="downloadResult()">Download PDF</button>
+</div>
+
+<script>
+var subjects = [
+"BUSSINES ACCOUNTING",
+"ENGLISH",
+"LANGUAGE",
+"FISH MARKETING",
+"MUTTON BIRIYANI"
+];
+
+function submitForm(){
+var name = document.getElementById("name").value;
+var reg = document.getElementById("regno").value;
+
+if(name=="" || reg==""){
+alert("Fill all fields");
+return;
+}
+
+document.getElementById("formBox").style.display="none";
+document.getElementById("loading").style.display="block";
+
+setTimeout(function(){
+showResult(name,reg);
+},2000);
+}
+
+function showResult(name,reg){
+document.getElementById("loading").style.display="none";
+document.getElementById("resultBox").style.display="block";
+
+document.getElementById("rname").innerHTML=name;
+document.getElementById("rreg").innerHTML=reg;
+
+var table="";
+var passCount=0;
+
+for(var i=0;i<subjects.length;i++){
+var marks = Math.floor(Math.random()*41)+60;
+var status="PASS";
+passCount++;
+
+table = table + "<tr><td>"+subjects[i]+"</td><td>"+marks+"</td><td>"+status+"</td></tr>";
+}
+
+document.getElementById("marksTable").innerHTML=table;
+document.getElementById("finalResult").innerHTML="Final Result: PASS 🎉";
+}
+
+function downloadResult(){
+alert("YOUR UNDERWEAR ARREST ON kammattippaadam 🚓😂");
+}
+</script>
+
+</body>
+</html>
